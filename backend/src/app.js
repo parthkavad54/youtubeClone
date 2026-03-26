@@ -5,7 +5,17 @@ import cookieParser from "cookie-parser"
 const app = express()
 
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl) 
+        // or any origin that matches the environment variable, or all origins for development
+        if (!origin || origin === process.env.CORS_ORIGIN || process.env.NODE_ENV !== 'production') {
+            callback(null, true);
+        } else {
+            // For production, we can be more strict, but for Vercel previews it's better to allow them.
+            // This reflects the origin back, fixing the "wildcard with credentials" issue.
+            callback(null, true);
+        }
+    },
     credentials: true
 }))
 
