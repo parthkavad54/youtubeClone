@@ -42,10 +42,10 @@ function Register() {
             return;
         }
 
-        if (!formData.avatar) {
-            toast.error("Please upload an avatar.");
-            return;
-        }
+        // if (!formData.avatar) {
+        //     toast.error("Please upload an avatar.");
+        //     return;
+        // }
 
         const data = new FormData();
         for (let key in formData) {
@@ -109,13 +109,12 @@ function Register() {
                         required
                     />
                     <Input
-                        label={'Avatar*'}
+                        label={'Avatar'}
                         type={'file'}
                         name={'avatar'}
                         onChange={handleChange}
-                        placeholder={'Upload your Avatar'}
+                        placeholder={'Upload your Avatar (Optional)'}
                         accept="image/*"
-                        required
                     />
                     <Input
                         label={'Cover Image'}
